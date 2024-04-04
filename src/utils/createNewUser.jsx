@@ -8,6 +8,7 @@ export const handleCreateUser = (
   newUserEmail,
   setError,
   newUserBirthday,
+  newUserCompanyName,
   newUserPhone,
   newUserWebsite,
 ) => {
@@ -17,7 +18,7 @@ export const handleCreateUser = (
     return;
   }
 
-  if (users?.some((user) => user?.name === newUserName)) {
+  if (users.some((user) => user.name === newUserName)) {
     setError("El nombre de usuario ya existe.");
     return;
   }
@@ -40,6 +41,8 @@ export const handleCreateUser = (
     email: newUserEmail,
     phone: newUserPhone,
     website: newUserWebsite,
+    company: {name: newUserCompanyName},
+    address:{city: "", street: "", suite: "", zipcode: "", geo:{lat: "", lng: ""}},
     birthday: newUserBirthday || "",
     avatar: gravatar.url(newUserEmail, { s: "200", d: "retro" }),
   };
@@ -58,8 +61,9 @@ export const toggleCreateModal = (
   setNewUserEmail,
   setNewUserPhone,
   setNewUserWebsite,
+  setNewUserCompanyName,
   setNewUserBirthday,
-  setError
+  setError,
 ) => {
   setShowCreateModal(!showCreateModal);
   // Limpiar campos al abrir/cerrar el modal
@@ -69,6 +73,7 @@ export const toggleCreateModal = (
     setNewUserPhone("");
     setNewUserWebsite("");
     setNewUserBirthday("");
+    setNewUserCompanyName("");
     setError("");
   }
 };

@@ -73,7 +73,7 @@ export const UserEditModal = ({
                   value={
                     editMode === "company"
                       ? editedValue
-                      : selectedUser.company.name
+                      : selectedUser?.company?.name
                   }
                   onChange={(e) => handleInputChange(e, setEditedValue)}
                 />

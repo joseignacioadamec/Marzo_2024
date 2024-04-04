@@ -15,6 +15,7 @@ export const UserTable = ({
   setEditedValue,
   editMode,
   setShowModal,
+  setShowCreateModal,
   selectedUser,
   editedValue,
 }) => {
@@ -83,13 +84,13 @@ export const UserTable = ({
         {currentUsers.map((user) => (
           <tr
             key={user.id}
-            onClick={() => handleUserClick(user, setSelectedUser, setShowModal)}
+            onClick={() => handleUserClick(user, setSelectedUser, setShowModal, setShowCreateModal)}
           >
             <td>
               {editMode === "name" &&
               selectedUser &&
               selectedUser.id === user.id ? (
-                <Form.Control type="text" value={editedValue} />
+                <Form.Control type="text" value={editedValue} readOnly />
               ) : (
                 <span
                   onClick={() =>
@@ -110,7 +111,7 @@ export const UserTable = ({
               {editMode === "email" &&
               selectedUser &&
               selectedUser.id === user.id ? (
-                <Form.Control type="text" value={editedValue} />
+                <Form.Control type="text" value={editedValue} readOnly />
               ) : (
                 <span
                   onClick={() =>
@@ -131,7 +132,7 @@ export const UserTable = ({
               {editMode === "phone" &&
               selectedUser &&
               selectedUser.id === user.id ? (
-                <Form.Control type="text" value={editedValue} />
+                <Form.Control type="text" value={editedValue} readOnly />
               ) : (
                 <span
                   onClick={() =>
@@ -152,7 +153,7 @@ export const UserTable = ({
               {editMode === "website" &&
               selectedUser &&
               selectedUser.id === user.id ? (
-                <Form.Control type="text" value={editedValue} />
+                <Form.Control type="text" value={editedValue} readOnly />
               ) : (
                 <span
                   onClick={() =>
@@ -173,8 +174,8 @@ export const UserTable = ({
             <td>
               {editMode === "company" &&
               selectedUser &&
-              selectedUser.id === user.id ? (
-                <Form.Control type="text" value={editedValue} />
+              selectedUser.id === user?.id ? (
+                <Form.Control type="text" value={editedValue} readOnly />
               ) : (
                 <span
                   onClick={() =>
@@ -195,8 +196,8 @@ export const UserTable = ({
             <td>
               {editMode === "address" &&
               selectedUser &&
-              selectedUser.id === user.id ? (
-                <Form.Control type="text" value={editedValue} />
+              selectedUser?.id === user?.id ? (
+                <Form.Control type="text" value={editedValue} readOnly />
               ) : (
                 <span
                   onClick={() =>
@@ -208,15 +209,18 @@ export const UserTable = ({
                       setEditedValue
                     )
                   }
-                >{`${user?.address?.street}, ${user?.address?.suite} - ${user?.address?.zipcode} (${user?.address?.city})`}</span>
+                >
+                  {user?.address?.street !== "" &&
+                    `${user?.address?.street}, ${user?.address?.suite} - ${user?.address?.zipcode} (${user?.address?.city})`}
+                </span>
               )}
             </td>
 
             <td>
               {editMode === "birthday" &&
               selectedUser &&
-              selectedUser.id === user.id ? (
-                <Form.Control type="text" value={editedValue} />
+              selectedUser?.id === user?.id ? (
+                <Form.Control type="text" value={editedValue} readOnly />
               ) : (
                 <span
                   onClick={() =>
@@ -229,7 +233,7 @@ export const UserTable = ({
                     )
                   }
                 >
-                  {user.birthday}
+                  {user?.birthday}
                 </span>
               )}
             </td>

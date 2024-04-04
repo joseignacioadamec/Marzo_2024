@@ -1,7 +1,13 @@
 // Función para manejar el clic en un usuario, muestra el modal de edición
-export const handleUserClick = (user, setSelectedUser, setShowModal) => {
+export const handleUserClick = (
+  user,
+  setSelectedUser,
+  setShowModal,
+  setShowCreateModal
+) => {
   setSelectedUser(user);
   setShowModal(true);
+  setShowCreateModal(false);
 };
 
 // Cierra el modal de detalles o edición

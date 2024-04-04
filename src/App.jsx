@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Pagination, Button, Form } from "react-bootstrap";
 import { getData } from "./helpers/getData";
-import { handleEdit, handleSave} from "./utils/modalEdition";
+import { handleEdit, handleSave } from "./utils/modalEdition";
 import { filteredUsers, handleSearch } from "./utils/search";
 import { toggleCreateModal } from "./utils/createNewUser";
 import { UserEditModal } from "./components/UserEditModal";
@@ -36,6 +36,7 @@ function App() {
   const [newUserEmail, setNewUserEmail] = useState("");
   const [newUserPhone, setNewUserPhone] = useState("");
   const [newUserWebsite, setNewUserWebsite] = useState("");
+  const [newUserCompanyName, setNewUserCompanyName] = useState("");
   const [newUserBirthday, setNewUserBirthday] = useState("");
   // Estado para el mensaje de error
   const [error, setError] = useState("");
@@ -47,6 +48,7 @@ function App() {
 
   console.log(users);
   console.log(selectedUser, "selectedUser");
+  console.log(showModal, "showModal");
 
   // Calcula los índices del primer y último usuario a mostrar en la página actual
   const indexOfLastUser = currentPage * usersPerPage;
@@ -85,6 +87,7 @@ function App() {
         setEditedValue={setEditedValue}
         editMode={editMode}
         setShowModal={setShowModal}
+        setShowCreateModal={setShowCreateModal}
         selectedUser={selectedUser}
         editedValue={editedValue}
       />
@@ -128,7 +131,8 @@ function App() {
             setNewUserPhone,
             setNewUserWebsite,
             setNewUserBirthday,
-            setError
+            setError,
+            setShowModal
           )
         }
       >
@@ -137,6 +141,7 @@ function App() {
       {/* Modal de creación de usuario */}
       <CreateUserModal
         showCreateModal={showCreateModal}
+        setShowModal={setShowModal}
         newUserName={newUserName}
         newUserEmail={newUserEmail}
         newUserPhone={newUserPhone}
@@ -152,6 +157,8 @@ function App() {
         setError={setError}
         users={users}
         setUsers={setUsers}
+        newUserCompanyName={newUserCompanyName}
+        setNewUserCompanyName={setNewUserCompanyName}
       />
     </div>
   );
